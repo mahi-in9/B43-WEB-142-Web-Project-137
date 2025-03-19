@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Home Dashboard</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .fan-container {
+            margin: 20px auto;
+            width: 200px;
+            height: 200px;
+            position: relative;
+        }
+
+        .fan {
+            width: 100px;
+            height: 100px;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/4/45/Black_Fan.svg');
+            background-size: cover;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(0deg);
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .light {
+            width: 50px;
+            height: 50px;
+            background-color: yellow;
+            border-radius: 50%;
+            margin: 10px auto;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Smart Home Dashboard</h2>
+
+    <h3>Fan Control</h3>
+    <div class="fan-container">
+        <div class="fan" id="fan"></div>
+    </div>
+    <label for="speed">Speed:</label>
+    <input type="range" id="speed" min="0" max="5" step="1" value="1" onchange="changeSpeed()">
+    <p>Speed: <span id="speedValue">1</span></p>
+
+    <h3>Light Control</h3>
+    <button id="lightButton1" onclick="toggleLight('light1', 'lightButton1')">Light 1: Turn On</button>
+    <div class="light" id="light1"></div>
+
+    <button id="lightButton2" onclick="toggleLight('light2', 'lightButton2')">Light 2: Turn On</button>
+    <div class="light" id="light2"></div>
+
+    <button id="lightButton3" onclick="toggleLight('light3', 'lightButton3')">Light 3: Turn On</button>
+    <div class="light" id="light3"></div>
+
+    <h3>AC Control</h3>
+    <button onclick="toggleAC()" id="acButton">Turn AC On</button>
+    <p>Temperature: <span id="acTemp">24</span>°C</p>
+    <button onclick="changeACTemp(1)">Increase Temp</button>
+    <button onclick="changeACTemp(-1)">Decrease Temp</button>
+
+    <h3>Door Lock Control</h3>
+    <button onclick="toggleDoor()" id="doorButton">Lock Door</button>
+
+    <h3>Curtain Control</h3>
+    <button onclick="toggleCurtain()" id="curtainButton">Open Curtains</button>
+
+    <h3>Smart Plug Control</h3>
+    <button onclick="togglePlug()" id="plugButton">Turn Plug On</button>
+
+    <h3>Security Camera Control</h3>
+    <button onclick="toggleCamera()" id="cameraButton">Enable Camera</button>
+
+    <h3>Water Heater Control</h3>
+    <button onclick="toggleHeater()" id="heaterButton">Turn Heater On</button>
+
+    <script>
+        function changeSpeed() {
+            var speed = document.getElementById("speed").value;
+            document.getElementById("speedValue").innerText = speed;
+            var fan = document.getElementById("fan");
+
+            if (speed == 0) {
+                fan.style.animation = "none";
+            } else {
+                fan.style.animation = `spin ${1 / speed}s linear infinite`;
+            }
+        }
+
+        function toggleLight(lightId, buttonId) {
+            var light = document.getElementById(lightId);
+            var button = document.getElementById(buttonId);
+            light.style.display = light.style.display === "none" ? "block" : "none";
+            button.innerText = button.innerText.includes("On") ? button.innerText.replace("Turn On", "Turn Off") : button.innerText.replace("Turn Off", "Turn On");
+        }
+
+        function toggleAC() {
+            var button = document.getElementById("acButton");
+            button.innerText = button.innerText.includes("On") ? "Turn AC Off" : "Turn AC On";
+        }
+
+        function changeACTemp(value) {
+            var tempElement = document.getElementById("acTemp");
+            var temp = parseInt(tempElement.innerText) + value;
+            tempElement.innerText = temp;
+        }
+
+        function toggleDoor() {
+            var button = document.getElementById("doorButton");
+            button.innerText = button.innerText.includes("Lock") ? "Unlock Door" : "Lock Door";
+        }
+
+        function toggleCurtain() {
+            var button = document.getElementById("curtainButton");
+            button.innerText = button.innerText.includes("Open") ? "Close Curtains" : "Open Curtains";
+        }
+
+        function togglePlug() {
+            var button = document.getElementById("plugButton");
+            button.innerText = button.innerText.includes("On") ? "Turn Plug Off" : "Turn Plug On";
+        }
+
+        function toggleCamera() {
+            var button = document.getElementById("cameraButton");
+            button.innerText = button.innerText.includes("Enable") ? "Disable Camera" : "Enable Camera";
+        }
+
+        function toggleHeater() {
+            var button = document.getElementById("heaterButton");
+            button.innerText = button.innerText.includes("On") ? "Turn Heater Off" : "Turn Heater On";
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code-Based Calorie Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">Smart Home</div>
+        <nav class="navbar">
+            <a href="#" class="active">Home</a>
+            <a href="#features">Features</a>
+            <a href="../AboutPage/AboutPage.html">About</a>
+            <a href="#footer">Contact</a>
+            <a href="../login-page/login.html" class="logout-button">Logout</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Welcome to Smart Home Manager</h1>
+        <p>You can control your home by this app.</p>
+        <button onclick="startScanning()">Start Manager</button>
+    </section>
+<!-- 
+    <section id="features" class="features">
+        <h2>Features</h2>
+        <div class="feature-container">
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h3>QR Code Scanning</h3>
+                    <p>Scan QR codes for quick dish calorie analysis.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Real-Time Updates</h3>
+                    <p>See calorie changes instantly as you modify quantities.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Inventory Management</h3>
+                    <p>Easily add, update, or delete dish information.</p>
+                </div>
+            </div>
+            <div class="feature-image">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxpb9hcBkgH45jXURdlceqLR4ZJ8lnifxAuQ&s"
+                    alt="Features Overview">
+            </div>
+        </div>
+    </section> -->
+
+    <h2>Fan Speed and Light Control</h2>
+    <div class="fan-container">
+        <div class="fan" id="fan"></div>
+    </div>
+    <label for="speed">Speed:</label>
+    <input type="range" id="speed" min="0" max="5" step="1" value="1" onchange="changeSpeed()">
+    <p>Speed: <span id="speedValue">1</span></p>
+
+    <h3>Light Control</h3>
+    <button id="lightButton" onclick="toggleLight()">Turn On</button>
+    <div class="light" id="light"></div>
+
+    <script>
+        function changeSpeed() {
+            var speed = document.getElementById("speed").value;
+            document.getElementById("speedValue").innerText = speed;
+            var fan = document.getElementById("fan");
+
+            if (speed == 0) {
+                fan.style.animation = "none"; // Stop the fan
+            } else {
+                fan.style.animation = `spin ${1 / speed}s linear infinite`;
+            }
+        }
+
+        function toggleLight() {
+            var light = document.getElementById("light");
+            var button = document.getElementById("lightButton");
+            if (light.style.display === "none" || light.style.display === "") {
+                light.style.display = "block";
+                button.innerText = "Turn Off";
+            } else {
+                light.style.display = "none";
+                button.innerText = "Turn On";
+            }
+        }
+    </script>
+
+
+    <footer id="footer" class="footer">
+        <p>&copy; 2025 QR Code-Based Calorie Calculator. All rights reserved.</p>
+        <div>
+            <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.logout-button').addEventListener('click', function (event) {
+            const confirmLogout = confirm('Are you sure you want to log out?');
+            if (!confirmLogout) {
+                event.preventDefault();
+            }
+        });
+        const navLinks = document.querySelectorAll('.navbar a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                navLinks.forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
