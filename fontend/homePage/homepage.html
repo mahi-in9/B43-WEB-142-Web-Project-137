@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code-Based Calorie Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">Smart Home</div>
+        <nav class="navbar">
+            <a href="#" class="active">Home</a>
+            <a href="#features">Features</a>
+            <a href="../AboutPage/AboutPage.html">About</a>
+            <a href="#footer">Contact</a>
+            <a href="../login-page/login.html" class="logout-button">Logout</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Welcome to Smart Home Manager</h1>
+        <p>You can control your home by this app.</p>
+        <button onclick="startScanning()">Start Manager</button>
+    </section>
+
+    <footer id="footer" class="footer">
+        <p>&copy; 2025 QR Code-Based Calorie Calculator. All rights reserved.</p>
+        <div>
+            <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.logout-button').addEventListener('click', function (event) {
+            const confirmLogout = confirm('Are you sure you want to log out?');
+            if (!confirmLogout) {
+                event.preventDefault();
+            }
+        });
+        const navLinks = document.querySelectorAll('.navbar a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                navLinks.forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
